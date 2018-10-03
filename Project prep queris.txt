@@ -1,0 +1,30 @@
+SELECT accounts.name, accounts.website, accounts.primary_poc
+FROM accounts
+WHERE accounts.name = 'Exxon Mobil'
+
+SELECT 
+orders.id, 
+orders.account_id,
+orders.standard_amt_usd,
+orders.standard_qty,
+orders.standard_amt_usd / orders.standard_qty AS unit_pr_std_paper
+FROM orders
+WHERE orders.standard_qty !=0
+
+SELECT 
+orders.id, 
+orders.account_id,
+orders.standard_amt_usd,
+orders.gloss_amt_usd,
+orders.poster_amt_usd,
+orders.poster_amt_usd / (orders.gloss_amt_usd + orders.standard_amt_usd + orders.poster_amt_usd) AS poster_paper_pc_rev
+FROM orders
+WHERE (orders.gloss_amt_usd + orders.standard_amt_usd + orders.poster_amt_usd) !=0
+
+
+Use the web_events table to find all information regarding individuals who were contacted via organic or adwords and started their account at any point in 2016 sorted from newest to oldest.
+
+SELECT *
+FROM web_events
+WHERE channel IN ('organic', 'adwords') AND occurred_at BETWEEN '2016-01-01' AND '2017-01-01'
+ORDER BY occurred_at DESC;

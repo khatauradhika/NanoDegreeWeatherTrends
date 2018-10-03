@@ -1,0 +1,20 @@
+Select *
+from city_list
+
+
+Select *
+from city_data
+where city = 'San Jose' and country = 'United States'
+
+SELECT
+  cd1.year,
+  cd1.avg_temp AS avg_temp_la,
+  cd2.avg_temp AS avg_temp_sf,
+  gd.avg_temp AS avg_temp_gd
+FROM city_data AS cd1, city_data AS cd2, global_data AS gd
+WHERE
+  (cd1.year = cd2.year) AND (cd2.year = gd.year) AND
+  (cd1.country = 'United States' AND cd1.city = 'Los Angeles') AND
+  (cd2.country = 'United States' AND cd2.city = 'San Francisco')					 
+ORDER BY year;
+
